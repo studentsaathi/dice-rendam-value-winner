@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cont {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .cont>div {
+            height: 60px;
+            width: 60px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        button {
+            margin: auto;
+            margin-left: 47%;
+        }
+        
+        #display {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="winner"></h1>
+    <div class="cont">
+        <div id="member-1"></div>
+        <div id="member-2"></div>
+        <div id="member-3"></div>
+    </div>
+
+    <button>ROLL THE DICE</button>
+</body>
+
+</html>
+<script>
+    document.querySelector("button").addEventListener("click", Roll)
+    var dice1 = document.getElementById("member-1")
+    var dice2 = document.getElementById("member-2")
+    var dice3 = document.getElementById("member-3")
+    var display = document.getElementById("winner")
+
+    function Roll() {
+
+
+        let d1 = dice1.innerHTML = randomFnc(7, 1)
+        let d2 = dice2.innerHTML = randomFnc(7, 1)
+        let d3 = dice3.innerHTML = randomFnc(7, 1)
+
+        // color - green, yellow , red
+
+        if (d1 > d2 && d1 > d3) {
+            dice1.style.backgroundColor = "green"
+            display.innerHTML = `Player 1 is winner: ${d1}`
+
+            if (d2 > d3) {
+                dice2.style.backgroundColor = "yellow"
+                dice3.style.backgroundColor = "red"
+            } else if (d3 > d2) {
+                dice2.style.backgroundColor = "red"
+                dice3.style.backgroundColor = "yellow"
+            } else if (d2 == d3) {
+                //dice1.style.backgroundColor= "blue"
+                dice2.style.backgroundColor = "blue"
+                dice3.style.backgroundColor = "blue"
+                    //display.innerHTML= `Draw!!`
+            }
+        } else if (d2 > d1 && d2 > d3) {
+            dice2.style.backgroundColor = "green"
+            display.innerHTML = `Player 2 is winner: ${d2}`
+
+            if (d1 > d3) {
+                dice1.style.backgroundColor = "yellow"
+                dice3.style.backgroundColor = "red"
+            } else if (d3 > d1) {
+                dice1.style.backgroundColor = "red"
+                dice3.style.backgroundColor = "yellow"
+            } else if (d1 == d3) {
+                dice1.style.backgroundColor = "blue"
+                    //dice2.style.backgroundColor= "blue"
+                dice3.style.backgroundColor = "blue"
+                    //display.innerHTML= `Draw!!`
+            }
+        } else if (d3 > d1 && d3 > d2) {
+            dice3.style.backgroundColor = "green"
+            display.innerHTML = `Player 3 is winner: ${d3}`
+
+            if (d1 > d2) {
+                dice1.style.backgroundColor = "yellow"
+                dice2.style.backgroundColor = "red"
+            } else if (d2 > d1) {
+                dice2.style.backgroundColor = "red"
+                dice1.style.backgroundColor = "yellow"
+            } else if (d1 == d2) {
+                dice1.style.backgroundColor = "blue"
+                dice2.style.backgroundColor = "blue"
+                    //dice3.style.backgroundColor= "blue"
+                    //display.innerHTML= `Draw!!`
+            }
+        } else if (d1 == d2 == d3) {
+            dice1.style.backgroundColor = "blue"
+            dice2.style.backgroundColor = "blue"
+            dice3.style.backgroundColor = "blue"
+            display.innerHTML = `Draw!!`
+        }
+    }
+
+    function randomFnc(max, min) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+</script>
